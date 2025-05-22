@@ -1,0 +1,7 @@
+name: workspace
+
+environment: 
+  sdk: any
+  
+workspace:
+  - packages/test
