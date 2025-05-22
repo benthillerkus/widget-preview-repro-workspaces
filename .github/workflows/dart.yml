@@ -28,7 +28,9 @@ jobs:
 
       - run: flutter widget-preview start
         if: ${{ matrix.run-in }} == "workspace"
+        timeout-minutes: 2
 
       - run: flutter widget-preview start
         if: ${{ matrix.run-in }} == "app"
         working-directory: packages/test
+        timeout-minutes: 2
