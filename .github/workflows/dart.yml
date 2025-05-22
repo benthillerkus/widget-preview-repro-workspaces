@@ -37,5 +37,5 @@ jobs:
 
       - run: flutter widget-preview start
         if: ${{ matrix.run-in }} == "app"
-        working-directory: packages/test
+        working-directory: packages/asdf
         timeout-minutes: 2

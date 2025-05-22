@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @Preview()
-Widget preview() => Text("test");
+Widget preview() => Text("fest");
 
 void main() {
   runApp(const MyApp());
