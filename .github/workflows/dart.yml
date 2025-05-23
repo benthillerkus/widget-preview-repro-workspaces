@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  preview:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
@@ -34,3 +34,35 @@ jobs:
       - run: flutter widget-preview start
         working-directory: ${{ matrix.where }}
         timeout-minutes: 2
+
+  test:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        channel: ['3.29.0', '3.32.0', master]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        if: ${{ matrix.channel == 'master' }}
+        with:
+          channel: master
+          cache: true
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ matrix.channel }}
+          cache: true
+
+      - run: flutter --version
+
+      - run: flutter pub get
+
+      - run: flutter test
+        working-directory: packages/asdf
