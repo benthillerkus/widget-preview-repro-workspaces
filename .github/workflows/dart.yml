@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         channel: [stable, master]
-        run-in: ["workspace", "app"]
+        where: ["./", "packages/asdf"]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -32,10 +32,5 @@ jobs:
       - run: flutter pub get
 
       - run: flutter widget-preview start
-        if: ${{ matrix.run-in }} == "workspace"
-        timeout-minutes: 2
-
-      - run: flutter widget-preview start
-        if: ${{ matrix.run-in }} == "app"
-        working-directory: packages/asdf
+        working-directory: ${{ matrix.where }}
         timeout-minutes: 2
