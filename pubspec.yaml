@@ -5,3 +5,4 @@ environment:
   
 workspace:
   - packages/asdf
+  - packages/asdf/example

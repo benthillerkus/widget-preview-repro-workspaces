@@ -37,7 +37,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        channel: [stable, master]
+        version: [3.35.4, master]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -46,17 +46,17 @@ jobs:
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
-        if: ${{ matrix.channel == 'master' }}
+        if: ${{ matrix.version == 'master' }}
         with:
           channel: master
           cache: true
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
-        if: ${{ matrix.channel != 'master' }}
+        if: ${{ matrix.version != 'master' }}
         with:
           channel: stable
-          flutter-version: ${{ matrix.channel }}
+          flutter-version: ${{ matrix.version }}
           cache: true
 
       - run: flutter --version
