@@ -14,7 +14,6 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         channel: [stable, master]
-        where: ["./", "packages/asdf"]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -31,15 +30,14 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter widget-preview start
-        working-directory: ${{ matrix.where }}
+      - run: flutter widget-preview start --web-server
         timeout-minutes: 2
 
   test:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        channel: ['3.35.4', master]
+        channel: [stable, master]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
